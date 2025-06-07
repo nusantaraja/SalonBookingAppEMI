@@ -1,13 +1,12 @@
 cookie:
-  name: "salon_app_cookie"
-  key: "some_secret_key_here"
-  expiry_days: 1
-
+  expiry_days: 30
+  key: a_very_secret_key_12345
+  name: salon_app_cookie
 credentials:
   usernames:
     admin:
-      name: "Admin Salon"
-      password: "hashed_password_here"  # Ganti dengan hasil hashing dari script
-
+      email: admin@example.com
+      name: Super Admin Salon
+      password: $2b$12$qu7LeakwbfbrrDE0Q.QJre8pn3kqOYelPLRvhD8X4uwmflI813v2u
 preauthorized:
   emails: []
