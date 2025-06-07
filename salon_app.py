@@ -1,13 +1,14 @@
-# --- START OF FILE salon_app.py (FIXED) ---
+# --- START OF FILE salon_app.py (RESTRUCTURED FOR PUBLIC & ADMIN) ---
 
 import streamlit as st
 import streamlit_authenticator as stauth
 import yaml
 from yaml.loader import SafeLoader
+from pages import customer_booking, admin_dashboard
 
-st.set_page_config(page_title="Salon Rambut & Kecantikan", layout="centered")
+# --- Konfigurasi Halaman & Autentikasi ---
+st.set_page_config(page_title="Salon Jennifer", layout="centered")
 
-# --- AUTHENTICATION ---
 with open('config.yaml') as file:
     config = yaml.load(file, Loader=SafeLoader)
 
@@ -18,44 +19,43 @@ authenticator = stauth.Authenticate(
     config['cookie']['expiry_days']
 )
 
-# Panggil method login(). Ini akan merender form login
-# dan menangani pembaruan session_state secara internal.
-authenticator.login()
+# --- Navigasi Utama di Sidebar ---
+st.sidebar.title("💇‍♀️ Salon Jennifer")
+page = st.sidebar.radio(
+    "Pilih Halaman:",
+    ("Booking Pelanggan", "Login Admin")
+)
 
-# --- MAIN APP LOGIC ---
+# --- Logika Tampilan Halaman ---
 
-if st.session_state["authentication_status"]:
-    # Jika login berhasil, tampilkan konten utama aplikasi dan tombol logout di sidebar.
+# 1. Halaman Booking Pelanggan (Publik, tidak perlu login)
+if page == "Booking Pelanggan":
+    customer_booking.show()
+
+# 2. Halaman Login Admin
+elif page == "Login Admin":
+    st.title("🔒 Halaman Login Admin")
     
-    # Menampilkan tombol logout dan nama user di sidebar
-    with st.sidebar:
-        st.title(f"Selamat datang, *{st.session_state['name']}*")
-        authenticator.logout() # Tombol logout dengan sintaks baru
+    # Render form login di sini
+    authenticator.login()
 
-    st.sidebar.title("Navigasi")
-    page = st.sidebar.selectbox("Pilih Halaman", ["Beranda", "Booking Pelanggan", "Dashboard Admin"])
-
-    if page == "Beranda":
-        st.title("💇‍♀️ Salon Rambut & Kecantikan")
-        st.markdown("Aplikasi ini membantu Anda untuk melakukan booking layanan kecantikan secara online.")
-        st.success("Anda berhasil login!")
-
-    elif page == "Booking Pelanggan":
-        # Pastikan file pages/customer_booking.py ada
-        from pages import customer_booking
-        customer_booking.show()
-
-    elif page == "Dashboard Admin":
-        # Pastikan file pages/admin_dashboard.py ada
-        from pages import admin_dashboard
+    if st.session_state["authentication_status"]:
+        # Jika login berhasil, tampilkan dashboard admin dan tombol logout
+        st.sidebar.success(f"Login sebagai *{st.session_state['name']}*")
+        
+        # Tampilkan dashboard admin
         admin_dashboard.show()
+        
+        # Tampilkan tombol logout di sidebar
+        with st.sidebar:
+            st.markdown("---")
+            authenticator.logout()
 
-elif st.session_state["authentication_status"] is False:
-    # Jika login gagal
-    st.error('Username/password yang Anda masukkan salah')
+    elif st.session_state["authentication_status"] is False:
+        st.error('Username/password yang Anda masukkan salah.')
+        st.warning('Lupa password? Hubungi pemilik salon.')
 
-elif st.session_state["authentication_status"] is None:
-    # Jika belum ada input login
-    st.warning('Silakan masukkan username dan password Anda')
+    elif st.session_state["authentication_status"] is None:
+        st.info('Silakan masukkan username dan password admin untuk melihat dashboard.')
 
-# --- END OF FILE salon_app.py (FIXED) ---
+# --- END OF FILE salon_app.py (RESTRUCTURED FOR PUBLIC & ADMIN) ---
