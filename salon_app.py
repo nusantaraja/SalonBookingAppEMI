@@ -1,10 +1,11 @@
-# --- START OF FILE salon_app.py (RESTRUCTURED FOR PUBLIC & ADMIN) ---
+# --- START OF FILE salon_app.py (FINAL & CLEAN) ---
 
 import streamlit as st
 import streamlit_authenticator as stauth
 import yaml
 from yaml.loader import SafeLoader
-from pages import customer_booking, admin_dashboard
+# Import dari folder 'views' yang baru
+from views import customer_booking, admin_dashboard
 
 # --- Konfigurasi Halaman & Autentikasi ---
 st.set_page_config(page_title="Salon Jennifer", layout="centered")
@@ -36,17 +37,12 @@ if page == "Booking Pelanggan":
 elif page == "Login Admin":
     st.title("🔒 Halaman Login Admin")
     
-    # Render form login di sini
     authenticator.login()
 
     if st.session_state["authentication_status"]:
-        # Jika login berhasil, tampilkan dashboard admin dan tombol logout
         st.sidebar.success(f"Login sebagai *{st.session_state['name']}*")
-        
-        # Tampilkan dashboard admin
         admin_dashboard.show()
         
-        # Tampilkan tombol logout di sidebar
         with st.sidebar:
             st.markdown("---")
             authenticator.logout()
@@ -58,4 +54,4 @@ elif page == "Login Admin":
     elif st.session_state["authentication_status"] is None:
         st.info('Silakan masukkan username dan password admin untuk melihat dashboard.')
 
-# --- END OF FILE salon_app.py (RESTRUCTURED FOR PUBLIC & ADMIN) ---
+# --- END OF FILE salon_app.py (FINAL & CLEAN) ---
