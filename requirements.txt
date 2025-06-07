@@ -3,4 +3,5 @@ pandas
 gspread
 gspread-dataframe
 oauth2client
-streamlit-authenticator
+streamlit-authenticator>=0.3.0
+PyYAML
