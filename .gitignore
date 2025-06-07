@@ -1,8 +1,5 @@
-# Python virtual environment
+# .gitignore
 venvs/
-
-# Python cache
 __pycache__/
-
-# Lain-lain (opsional, tapi bagus untuk dimiliki)
 .DS_Store
+creds.json  # <-- Tambahkan baris ini
