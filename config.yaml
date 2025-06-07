@@ -1,0 +1,13 @@
+cookie:
+  name: "salon_app_cookie"
+  key: "some_secret_key_here"
+  expiry_days: 1
+
+credentials:
+  usernames:
+    admin:
+      name: "Admin Salon"
+      password: "hashed_password_here"  # Ganti dengan hasil hashing dari script
+
+preauthorized:
+  emails: []
