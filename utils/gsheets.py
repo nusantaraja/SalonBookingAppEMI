@@ -68,4 +68,15 @@ def get_all_bookings_df():
         st.error(f"Gagal mengambil data booking: {e}")
         return pd.DataFrame()
 
+def add_promo(data):
+    """Menambahkan data promo baru ke worksheet 'Promos'."""
+    try:
+        sh = connect_sheet()
+        worksheet = sh.worksheet("Promos")
+        worksheet.append_row(list(data.values()))
+        return True
+    except Exception as e:
+        st.error(f"Gagal menambahkan promo: {e}")
+        return False
+
 # --- END OF FILE utils/gsheets.py (UPDATED WITH YOUR INFO) ---
