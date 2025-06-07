@@ -11,9 +11,10 @@ Aplikasi ini dibuat dengan **Streamlit** untuk memudahkan proses booking layanan
 
 🗂 Struktur Repo Final
 
-salon_app.py/
+```
+SalonBookingAppEMI/
 │
-├── streamlit_app.py            # Main app
+├── salon_app.py            # Main app
 ├── requirements.txt            # Library Python
 ├── config.yaml                 # Konfigurasi login admin
 ├── README.md                   # Panduan penggunaan
@@ -25,6 +26,9 @@ salon_app.py/
 └── pages/
     ├── customer_booking.py     # Halaman booking pelanggan
     └── admin_dashboard.py      # Dashboard admin
+```
+
+
 
 ---
 ## ✅ Fitur Utama
