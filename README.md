@@ -9,6 +9,24 @@ Aplikasi ini dibuat dengan **Streamlit** untuk memudahkan proses booking layanan
 
 ---
 
+🗂 Struktur Repo Final
+
+salon_app.py/
+│
+├── streamlit_app.py            # Main app
+├── requirements.txt            # Library Python
+├── config.yaml                 # Konfigurasi login admin
+├── README.md                   # Panduan penggunaan
+├── LICENSE                     # MIT License
+│
+├── utils/
+│   └── gsheets.py              # Fungsi akses Google Sheets
+│
+└── pages/
+    ├── customer_booking.py     # Halaman booking pelanggan
+    └── admin_dashboard.py      # Dashboard admin
+
+---
 ## ✅ Fitur Utama
 
 | Fitur | Deskripsi |
